@@ -11,24 +11,24 @@
 //   This program is free software; you can redistribute it and/or
 //   modify it under the terms of version 2.0  of the GNU General
 //   Public License as published by the Free Software Foundation.
-// 
+//
 //   This program is distributed in the hope that it will be useful,
 //   but WITHOUT ANY WARRANTY; without even the implied warranty of
 //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //   GNU General Public License for more details.
-// 
+//
 //   You should have received a copy of version 2.0 of the GNU General
 //   Public License along with this program; if not, write to the Free
 //   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 //   MA 02110-1301, USA.
-// 
-// 
+//
+//
 // ## END COPYRIGHT, LICENSE AND WARRANTY NOTICE ##
 //
 
-/* 
+/*
  * Brief: ezjsc rpc server call
- * Lets you call custom php code(s) from javascript to return json / xhtml / xml / text 
+ * Lets you call custom php code(s) from javascript to return json / xhtml / xml / text
  */
 
 $http           = eZHTTPTool::instance();
@@ -109,7 +109,7 @@ if ( $callType === 'stream' )
     {
         // intervall in milliseconds, minimum is 0.05 seconds
         $callInterval = $Params['interval'] * 1000;
-    } 
+    }
     else
     {
         // default interval is every 0.5 seconds
@@ -137,7 +137,8 @@ if ( $callType === 'stream' )
 }
 else
 {
-    echo implode( $callSeperator, multipleezjscServerCalls( $callFnList, $contentType ) );
+    $out = implode( $callSeperator, multipleezjscServerCalls( $callFnList, $contentType ) );
+    echo ezpEvent::getInstance()->filter( 'response/output', $out );
 }
 
 
